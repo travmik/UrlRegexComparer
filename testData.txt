@@ -1,5 +1,21 @@
 simple|http://foo.com/blah_blah|http://foo.com/blah_blah
-end-slash|http://foo.com/blah_blah/|http://foo.com/blah_blah/
+end-slash[es]|http://foo.com/blah_blah/|http://foo.com/blah_blah/
 param|http://foo.com/(something)?after=parens|http://foo.com/(something)?after=parens
 params|http://foo.com/(something)?after=parens&before=blah|http://foo.com/(something)?after=parens&before=blah
 tag|http://foo.com/blah_blah#tag1|http://foo.com/blah_blah#tag1
+tag[es]|http://foo.com/blah_blah/#tag1|http://foo.com/blah_blah/#tag1
+www|www.foo.com/blah_blah|www.foo.com/blah_blah
+www[es]|www.foo.com/blah_blah/|www.foo.com/blah_blah/
+dot|http://foo.com/blah_blah.|http://foo.com/blah_blah
+coma|http://foo.com/blah_blah,|http://foo.com/blah_blah
+dot[es]|http://foo.com/blah_blah/.|http://foo.com/blah_blah/
+coma[es]|http://foo.com/blah_blah/,|http://foo.com/blah_blah/
+brackets|<http://foo.com/blah_blah>|http://foo.com/blah_blah
+quotes|"http://foo.com/blah_blah"|http://foo.com/blah_blah
+s-quotes|'http://foo.com/blah_blah'|http://foo.com/blah_blah
+brackets[es]|<http://foo.com/blah_blah/>|http://foo.com/blah_blah/
+param+doc|http://www.foo.com/blah/?p=364.|http://www.foo.com/blah/?p=364
+in html|<tag>http://foo.com</tag>|http://foo.com
+in text|Just a www.foo.com link.|www.foo.com
+naked|foo.com/foo|foo.com/foo
+caps|WWW.FOO.COM|WWW.FOO.COM

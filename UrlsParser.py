@@ -84,7 +84,7 @@ class UrlParser:
 				if i+1 < len(self.result):
 					print repr(lines[idx].passTest).center(8),
 				else:
-					print repr(lines[idx].passTest).rjust(8)
+					print repr(lines[idx].passTest).center(8)
 
 
 
