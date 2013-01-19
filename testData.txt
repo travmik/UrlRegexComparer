@@ -1,0 +1,5 @@
+simple|http://foo.com/blah_blah|http://foo.com/blah_blah
+end-slash|http://foo.com/blah_blah/|http://foo.com/blah_blah/
+param|http://foo.com/(something)?after=parens|http://foo.com/(something)?after=parens
+params|http://foo.com/(something)?after=parens&before=blah|http://foo.com/(something)?after=parens&before=blah
+tag|http://foo.com/blah_blah#tag1|http://foo.com/blah_blah#tag1
