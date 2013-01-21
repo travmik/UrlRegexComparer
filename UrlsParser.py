@@ -1,6 +1,8 @@
 #!/usr/bin/env python
-# coding: utf-8 
-
+# coding: utf-8
+"""
+*** Warning: This code works but is extremely hacky, patches welcome ***
+"""
 import re
 
 class LineData:
@@ -21,19 +23,25 @@ class LineData:
 
 class UrlParser:
 	URL_REGEX = [
-		# got from http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+		# 0 got from http://daringfireball.net/2010/07/improved_regex_for_matching_urls
 		r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))
-		+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""",\
-\
-		# got from http://stackoverflow.com/questions/520031/whats-the-cleanest-way-to-extract-urls-from-a-string-using-python
+		    +(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""",
+		# 1 got from http://stackoverflow.com/questions/520031/whats-the-cleanest-way-to-extract-urls-from-a-string-using-python
 		r"""((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.‌​][a-z]{2,4}/)(?:[^\s()<>]+|
-		(([^\s()<>]+|(([^\s()<>]+)))*))+(?:(([^\s()<>]+|(‌​([^\s()<>]+)))*)|[^\s`!()[]{};:'".,<>?«»“”‘’]))""",\
-\
-		# got from http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
+		(([^\s()<>]+|(([^\s()<>]+)))*))+(?:(([^\s()<>]+|(‌​([^\s()<>]+)))*)|[^\s`!()[]{};:'".,<>?«»“”‘’]))""",
+		# 2 got from http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
 		r"^(ftp|http|https)://([_a-z\d\-]+(.[_a-z\d\-]+)+)(([_a-z\d\-\./]+[_a-z\d\-\/])+)*/*",\
-\
-		#byt this spec http://www.apps.ietf.org/rfc/rfc3986.html
-		r"^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(\#(.*))?"
+		# 3 byt this spec http://www.apps.ietf.org/rfc/rfc3986.html
+		r"^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(\#(.*))?",
+        # 4 http://stackoverflow.com/questions/82398/how-to-match-uris-in-text#83378
+		r"""\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*""",
+        # 5
+        r"""(http|https|ftp|mailto|tel):\S+[/a-zA-Z0-9]""",
+        # 6
+        r"""^((ht|f)tp(s?)\:\/\/|~/|/)?([\w]+:\w+@)?([a-zA-Z]{1}([\w-]+.)+([\w]{2,5}))
+            (:[\d]{1,5})?((/?\w+/)+|/?)(\w+.[\w]{3,4})?((\?\w+=\w+)?(&\w+=\w+)*)?""",
+        #7
+        r"""(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]"""
 	]
 
 	TEST_DATA_FILE = "testData.txt"
@@ -47,8 +55,6 @@ class UrlParser:
 				 if line.strip() != ""]
 		file.close()
 
-		for element in self.data:
-			print element
 		self.result = []
 
 		for regex in self.URL_REGEX:
@@ -75,7 +81,7 @@ class UrlParser:
 	def printResult(self):
 		for idx, regex in enumerate(self.URL_REGEX):
 			print "%2d %s" % (idx + 1, regex)
-		print "\n\n"
+		print "\n"
 
 		for idx, sample in enumerate(self.data):
 			print repr(idx + 1).rjust(2),

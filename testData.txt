@@ -19,3 +19,4 @@ in html|<tag>http://foo.com</tag>|http://foo.com
 in text|Just a www.foo.com link.|www.foo.com
 naked|foo.com/foo|foo.com/foo
 caps|WWW.FOO.COM|WWW.FOO.COM
+no spaces|Just ahttp://www.foo.com link.|www.foo.com
